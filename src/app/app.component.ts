@@ -16,19 +16,16 @@ export class AppComponent {
   unit: string = 'Miles'
 
   ngOnInit(){
-    console.log('data - ', values)
     this.typesOfSports = Object.keys(values)
   }
 
   
 
   onInfoInputted(eventData: { inputs: Input }){
-  console.log('hits', eventData.inputs.isMiles)
   const inputs = eventData.inputs
    const steps = this.stepsData[inputs.activity]*(inputs.timeMin/60)
-   const distanceKm = steps*inputs.stepLength
+   const distanceKm = (steps*inputs.stepLength)/1000
    this.distance = inputs.isMiles? distanceKm*0.621371 : distanceKm
    this.unit = inputs.isMiles? 'Miles': 'Km'
-   console.log('hits', this.distance, this.unit)
   }
 }

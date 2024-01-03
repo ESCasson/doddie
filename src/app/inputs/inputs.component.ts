@@ -11,9 +11,10 @@ export class InputsComponent {
   @Input() typesOfSports!: string[]| null;
   @Output() infoInputted = new EventEmitter<{ inputs: InputClass }>();
 
-  averageStride = 0.78
+  averageStepLength = 0.78
+  actualStepLength!: number | null;
 
-  model = new InputClass(this.averageStride, true, 'Ballet', 0, true)
+  model = new InputClass(this.averageStepLength, true, 'Ballet', 0, true)
 
   submitted = false;
 
@@ -21,20 +22,26 @@ export class InputsComponent {
 
   onSexChange(value: any) { 
     if(value.target.value === 'true'){
-      this.model.isMale = true
-     return this.averageStride = 0.78
+     this.model.isMale = true
+     this.averageStepLength = 0.78
+     return this.onInputChange()
     }
     this.model.isMale = false
-    return this.averageStride = 0.7
+    this.averageStepLength = 0.7
+    return this.onInputChange()
   }
 
-  onTimeChange(event: any){
+  getStepLength(){
+    if(this.actualStepLength && this.actualStepLength >= 0.5){
+      return this.actualStepLength
+    }
+    return this.averageStepLength
+  }
+
+  onInputChange(){
     if(this.model.timeMin <= 0)  return
      setTimeout(()=>{
-      console.log('time change')
-      if(!this.model.stepLength || this.model.stepLength <=0 ){
-        this.model.stepLength = this.averageStride
-      }
+      this.model.stepLength = this.getStepLength()
       this.infoInputted.emit({ inputs: this.model })
      }, 100)
   }
