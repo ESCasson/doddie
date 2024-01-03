@@ -1,14 +1,34 @@
 import { Component } from '@angular/core';
-import { CommonModule } from '@angular/common';
-import { RouterOutlet } from '@angular/router';
+import * as values from './values.json'
+import { Input } from './inputs/input.js';
 
 @Component({
   selector: 'app-root',
-  standalone: true,
-  imports: [CommonModule, RouterOutlet],
   templateUrl: './app.component.html',
-  styleUrl: './app.component.scss'
+  styleUrls: ['./app.component.scss']
 })
+
 export class AppComponent {
   title = 'doddie';
+  typesOfSports: string[]|null = null
+  stepsData: Record<string, number> = values
+  distance: number | null = null;
+  unit: string = 'Miles'
+
+  ngOnInit(){
+    console.log('data - ', values)
+    this.typesOfSports = Object.keys(values)
+  }
+
+  
+
+  onInfoInputted(eventData: { inputs: Input }){
+  console.log('hits', eventData.inputs.isMiles)
+  const inputs = eventData.inputs
+   const steps = this.stepsData[inputs.activity]*(inputs.timeMin/60)
+   const distanceKm = steps*inputs.stepLength
+   this.distance = inputs.isMiles? distanceKm*0.621371 : distanceKm
+   this.unit = inputs.isMiles? 'Miles': 'Km'
+   console.log('hits', this.distance, this.unit)
+  }
 }

@@ -1,0 +1,36 @@
+<form (ngSubmit)="onSubmit()" #inputForm="ngForm">
+    <div class="form-group">
+        <h1>Calculate Stride (optional)</h1>
+        <h2>Option 1: Average Stride</h2>
+        <label for="sex">For a </label>
+        <select class="form-control" id="sex" (change)="onSexChange($event)">
+          <option [value]=true>{{'Man'}}</option>
+          <option [value]=false>{{'Woman'}}</option>
+        </select>
+        <h3>{{averageStride}} m</h3>
+        <h2>Option 2: Actual Stride</h2>
+        <label for="stepLength">{{'Actual Step Length (m)'}}</label>
+        <input type="number" class="form-control" id="stepLength"
+           [(ngModel)]="model.stepLength" name="stepLength">
+        <div>
+        <h1>Calculate Distance</h1>
+          <label for="activity">Activity</label>
+            <select class="form-control" id="activity" required  name="activity" [(ngModel)]="model.activity">
+              <option *ngFor="let type of typesOfSports" [value]="type">{{type}}</option>
+            </select>
+            <label for="timeMin">{{'Time in minutes'}}</label>
+            <input type="number" class="form-control" id="timeMin"
+               [(ngModel)]="model.timeMin" name="timeMin" (change)="onTimeChange($event)">
+          <div>
+            <label for="isMiles">Distance Units </label>
+                <select class="form-control" id="isMiles" name="isMiles" [(ngModel)]="model.isMiles"  (change)="onTimeChange($event)">
+                <option [value]=true>{{'Miles'}}</option>
+                <option [value]=false>{{'Km'}}</option>
+                </select>
+          </div>
+                
+    
+              
+    </div>
+    </div>
+</form>
