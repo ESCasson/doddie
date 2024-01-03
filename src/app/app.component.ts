@@ -19,8 +19,6 @@ export class AppComponent {
     this.typesOfSports = Object.keys(values)
   }
 
-  
-
   onInfoInputted(eventData: { inputs: Input }){
   const inputs = eventData.inputs
    const steps = this.stepsData[inputs.activity]*(inputs.timeMin/60)
