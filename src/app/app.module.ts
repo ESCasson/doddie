@@ -6,6 +6,7 @@ import { FormsModule } from '@angular/forms';
 import { AppComponent } from './app.component';
 import { InputsComponent } from './inputs/inputs.component';
 import { DistanceComponent } from './distance/distance.component';
+import { InputOptionsSearchComponent } from './inputs/input-options-search/input-options-search.component';
 
 @NgModule({
   imports: [
@@ -16,7 +17,8 @@ import { DistanceComponent } from './distance/distance.component';
   declarations: [
     AppComponent,
     InputsComponent,
-    DistanceComponent
+    DistanceComponent,
+    InputOptionsSearchComponent
   ],
   providers: [],
   bootstrap: [ AppComponent ]

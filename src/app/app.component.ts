@@ -20,10 +20,10 @@ export class AppComponent {
   }
 
   onInfoInputted(eventData: { inputs: Input }){
-  const inputs = eventData.inputs
-   const steps = this.stepsData[inputs.activity]*inputs.timeMin
-   const distanceKm = (steps*inputs.stepLength)/1000
-   this.distance = inputs.isMiles? distanceKm*0.621371 : distanceKm
-   this.unit = inputs.isMiles? 'Miles': 'Km'
+    const inputs = eventData.inputs
+    const steps = this.stepsData[inputs.activity]*inputs.timeMin
+    const distanceKm = (steps*inputs.stepLength)/1000
+    this.distance = inputs.isMiles? distanceKm*0.621371 : distanceKm
+    this.unit = inputs.isMiles? 'Miles': 'Km'
   }
 }
