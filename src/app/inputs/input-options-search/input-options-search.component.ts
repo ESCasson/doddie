@@ -28,7 +28,6 @@ export class InputOptionsSearchComponent {
   }
 
   onChange() {
-    console.log('hits')
     setTimeout(() => {
         this.searchOptions()
     }, 20)
@@ -36,7 +35,6 @@ export class InputOptionsSearchComponent {
 
   searchOptions(){
     const filtered = this.options.filter((option) => {
-      console.log(option.title.search(new RegExp(`${this.searchInput}`, 'i')))
       return option.title.search(new RegExp(`${this.searchInput}`, 'i')) !== -1
     })
     if(filtered.length > 0) return this.filteredOptions = filtered

@@ -15,12 +15,6 @@
         <div>
         <h1>Calculate Distance</h1>
           <label for="activity">Activity</label>
-            <!-- <select class="form-control" id="activity" required  name="activity"
-             [(ngModel)]="model.activity" (change)="onInputChange()">
-             @for (type of typesOfSports; track type){
-               <option  [value]="type">{{type}}</option>
-             }
-            </select> -->
             <app-input-options-search [options]='typesOfSportsForSearchSelect' (selectedValue)=onActivitySelected($event)
             ></app-input-options-search>
             <label for="timeMin">{{'Time in minutes'}}</label>
