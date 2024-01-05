@@ -1,5 +1,6 @@
-import { Component, Input, Output, EventEmitter } from '@angular/core';
+import { Component, Input, Output, EventEmitter, OnInit } from '@angular/core';
 import { Input as InputClass} from './input';
+import { SelectOption } from './input-options-search/input-options-search.component';
 
 
 @Component({
@@ -7,7 +8,7 @@ import { Input as InputClass} from './input';
   templateUrl: './inputs.component.html',
   styleUrl: './inputs.component.scss'
 })
-export class InputsComponent {
+export class InputsComponent implements OnInit {
   @Input() typesOfSports!: string[]| null;
   @Output() infoInputted = new EventEmitter<{ inputs: InputClass }>();
 
@@ -17,6 +18,16 @@ export class InputsComponent {
   model = new InputClass(this.averageStepLength, true, 'Ballet', 0, true)
 
   submitted = false;
+
+  typesOfSportsForSearchSelect: SelectOption[] = []
+
+  ngOnInit() {
+    if(this.typesOfSports){
+     this.typesOfSportsForSearchSelect = this.typesOfSports.map((type, index)=>{
+       return {id: index, title: type, value: type}
+     })
+    }
+  }
 
   onSubmit() { this.submitted = true; }
 
@@ -44,5 +55,10 @@ export class InputsComponent {
       this.model.stepLength = this.getStepLength()
       this.infoInputted.emit({ inputs: this.model })
      }, 100)
+  }
+
+  onActivitySelected(eventData: {value: string}){
+    this.model.activity = eventData.value
+    this.onInputChange()
   }
 }

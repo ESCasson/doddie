@@ -1,3 +1,11 @@
 <input type="string" id="searchInput" 
   [(ngModel)]="this.searchInput" name="searchInput" 
-  (keypress)="onChange()">
+  (keyup)="onChange()">
+  <div>
+    <select class="form-control" 
+    [(ngModel)]="selected" (change)="onSelectedChange()">
+    @for (option of filteredOptions; track option.id){
+      <option  [value]="option.value">{{option.title}}</option>
+    }
+   </select>
+  </div>
